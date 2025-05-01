@@ -1,103 +1,124 @@
-//UserResult.jsx
-import React, { useState } from "react";
-import { Container, Typography, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-import axios from "axios";
+import { useState } from "react";
+import service from "../../../appwrite/cong"; // Make sure the path is correct
 
-const publishResults = async () => {
-  try {
-    await axios.put("http://localhost:8000/api/results/publish-results");
-    alert("Results published successfully!");
-  } catch (error) {
-    console.error("Error publishing results:", error);
-    alert("Failed to publish results.");
-  }
-};
+function UserResult() {
+  const [name, setName] = useState('');
+  const [rollNo, setRollNo] = useState('');
+  const [studentClass, setStudentClass] = useState('');
+  const [java, setJava] = useState('');
+  const [python, setPython] = useState('');
+  const [c, setC] = useState('');
+  const [fds, setFds] = useState('');
+  const [ai, setAi] = useState('');
+  const [php, setPhp] = useState('');
+  const [submittedMarks, setSubmittedMarks] = useState([]);
 
-export default function UserResult() {
-  const [students, setStudents] = useState([]);
-  const [formData, setFormData] = useState({ name: "", rollNo: "", class: "", subject: "", marks: "" });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleAdd = () => {
-    if (!formData.name || !formData.rollNo || !formData.class || !formData.subject || !formData.marks) {
-      alert("Please fill in all fields");
+  async function submitMarks() {
+    if (!name || !rollNo || !studentClass || !java || !python || !c || !fds || !ai || !php) {
+      alert('Please fill all fields!');
       return;
     }
-    setStudents([...students, { ...formData, id: Date.now() }]);
-    setFormData({ name: "", rollNo: "", class: "", subject: "", marks: "" });
-  };
 
-  const handleDelete = (id) => {
-    setStudents(students.filter((student) => student.id !== id));
-  };
-
-  const handleEdit = (id) => {
-    const student = students.find((s) => s.id === id);
-    setFormData(student);
-    setStudents(students.filter((s) => s.id !== id));
-  };
-
-  const publishResults = async () => {
     try {
-      await axios.post("http://localhost:8000/api/results", { results: students });
-      alert("Results Published Successfully!");
-      setStudents([]); // Clear results after publishing
+      const res=await service.UploadMarksData(
+        name,
+        rollNo,
+        studentClass,
+        parseInt(java),
+        parseInt(python),
+        parseInt(c),
+        parseInt(fds),
+        parseInt(ai),
+        parseInt(php)
+      );
+
+      alert('Marks Submitted Successfully!');
+
+      setSubmittedMarks([...submittedMarks, {
+        name,
+        rollNo,
+        studentClass,
+        java,
+        python,
+        c,
+        fds,
+        ai,
+        php
+      }]);
+
+      setName('');
+      setRollNo('');
+      setStudentClass('');
+      setJava('');
+      setPython('');
+      setC('');
+      setFds('');
+      setAi('');
+      setPhp('');
     } catch (error) {
-      console.error("Error publishing results", error);
-      alert("Failed to publish results");
+      console.error("Error submitting marks:", error);
+      alert('Error submitting marks. Try again.');
     }
-  };
+  }
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>User Result Management</Typography>
+    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+      <h2>Enter Student Marks</h2>
 
-      <TextField label="Name" name="name" value={formData.name} onChange={handleChange} fullWidth margin="normal" />
-      <TextField label="Roll No" name="rollNo" value={formData.rollNo} onChange={handleChange} fullWidth margin="normal" />
-      <TextField label="Class" name="class" value={formData.class} onChange={handleChange} fullWidth margin="normal" />
-      <TextField label="Subject" name="subject" value={formData.subject} onChange={handleChange} fullWidth margin="normal" />
-      <TextField label="Marks" name="marks" type="number" value={formData.marks} onChange={handleChange} fullWidth margin="normal" />
+      <input type="text" placeholder="Student Name" value={name} onChange={(e) => setName(e.target.value)} />
+      <input type="text" placeholder="Roll Number" value={rollNo} onChange={(e) => setRollNo(e.target.value)} />
+      <input type="text" placeholder="Class" value={studentClass} onChange={(e) => setStudentClass(e.target.value)} />
+      <input type="number" placeholder="Java" value={java} onChange={(e) => setJava(e.target.value)} />
+      <input type="number" placeholder="Python" value={python} onChange={(e) => setPython(e.target.value)} />
+      <input type="number" placeholder="C" value={c} onChange={(e) => setC(e.target.value)} />
+      <input type="number" placeholder="FDS" value={fds} onChange={(e) => setFds(e.target.value)} />
+      <input type="number" placeholder="AI" value={ai} onChange={(e) => setAi(e.target.value)} />
+      <input type="number" placeholder="PHP" value={php} onChange={(e) => setPhp(e.target.value)} />
 
-      <Button variant="contained" color="primary" onClick={handleAdd} style={{ marginRight: "10px" }}>Add</Button>
-      {/*<Button variant="contained" color="secondary" onClick={handlePublish} disabled={students.length === 0}>Publish</Button>
+      <button 
+        onClick={submitMarks}
+        style={{ padding: '10px 20px', marginTop: '10px', backgroundColor: '#4CAF50', color: 'white', border: 'none', cursor: 'pointer' }}
+      >
+        Submit Marks
+      </button>
 
-      {/* Publish Button for Final Publishing */}
-      <Button variant="contained" color="success" onClick={publishResults} style={{ marginLeft: "10px" }}>
-        📢 Publish Results
-      </Button>
-
-      <TableContainer component={Paper} style={{ marginTop: "20px" }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Roll No</TableCell>
-              <TableCell>Class</TableCell>
-              <TableCell>Subject</TableCell>
-              <TableCell>Marks</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {students.map((student) => (
-              <TableRow key={student.id}>
-                <TableCell>{student.name}</TableCell>
-                <TableCell>{student.rollNo}</TableCell>
-                <TableCell>{student.class}</TableCell>
-                <TableCell>{student.subject}</TableCell>
-                <TableCell>{student.marks}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleEdit(student.id)} color="primary">Edit</Button>
-                  <Button onClick={() => handleDelete(student.id)} color="error">Delete</Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+      {submittedMarks.length > 0 && (
+        <>
+          <h3>Submitted Marks</h3>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Name</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Roll No</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Class</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Java</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>Python</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>C</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>FDS</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>AI</th>
+                <th style={{ border: '1px solid black', padding: '8px' }}>PHP</th>
+              </tr>
+            </thead>
+            <tbody>
+              {submittedMarks.map((mark, index) => (
+                <tr key={index}>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.name}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.rollNo}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.studentClass}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.java}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.python}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.c}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.fds}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.ai}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{mark.php}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
+    </div>
   );
 }
+
+export default UserResult;

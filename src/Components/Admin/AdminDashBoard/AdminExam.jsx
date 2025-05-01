@@ -1,14 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { Dialog, DialogTitle, DialogContent, TextField, Button, DialogActions } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  Button,
+  DialogActions,
+} from "@mui/material";
+
+import service from "../../../appwrite/cong"; // Adjust the path based on your folder structure
 
 const ExamSchedule = () => {
   const [open, setOpen] = useState(false);
-  const [examData, setExamData] = useState({ title: "", date: "", startTime: "", endTime: "" });
+  const [examData, setExamData] = useState({
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+  });
   const [events, setEvents] = useState([]);
+
+  // Fetch exams from Appwrite when component mounts
+  useEffect(() => {
+    const fetchExams = async () => {
+      const res = await service.getAllExam();
+      if (res) {
+        const mappedEvents = res.map((exam) => ({
+          id: exam.$id,
+          title: `${exam.subject} (${exam.startTime} - ${exam.endTime})`,
+          start: `${exam.date}T${exam.startTime}`,
+          end: `${exam.date}T${exam.endTime}`,
+        }));
+        setEvents(mappedEvents);
+      }
+    };
+
+    fetchExams();
+  }, []);
 
   const handleDateClick = (arg) => {
     setExamData({ ...examData, date: arg.dateStr });
@@ -19,22 +50,38 @@ const ExamSchedule = () => {
     setExamData({ ...examData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!examData.title || !examData.startTime || !examData.endTime) {
       alert("Please fill all fields!");
       return;
     }
 
-    const newEvent = {
-      id: events.length + 1,
-      title: `${examData.title} (${examData.startTime} - ${examData.endTime})`,
-      start: `${examData.date}T${examData.startTime}`,
-      end: `${examData.date}T${examData.endTime}`,
-    };
+    if (examData.startTime >= examData.endTime) {
+      alert("Start time must be before end time.");
+      return;
+    }
 
-    setEvents([...events, newEvent]);
-    setOpen(false);
-    setExamData({ title: "", date: "", startTime: "", endTime: "" }); // Reset form
+    const response = await service.UploadExamTimeTable(
+      examData.title,
+      examData.date,
+      examData.startTime,
+      examData.endTime
+    );
+
+    if (response) {
+      const newEvent = {
+        id: response.$id,
+        title: `${examData.title} (${examData.startTime} - ${examData.endTime})`,
+        start: `${examData.date}T${examData.startTime}`,
+        end: `${examData.date}T${examData.endTime}`,
+      };
+
+      setEvents([...events, newEvent]);
+      setOpen(false);
+      setExamData({ title: "", date: "", startTime: "", endTime: "" });
+    } else {
+      alert("Failed to save exam schedule.");
+    }
   };
 
   return (
@@ -74,7 +121,7 @@ const ExamSchedule = () => {
             fullWidth
             type="time"
             label="End Time"
-            name="endTime"
+            name="endTime"  
             value={examData.endTime}
             onChange={handleInputChange}
             margin="dense"
@@ -83,7 +130,9 @@ const ExamSchedule = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSubmit} variant="contained" color="primary">Save</Button>
+          <Button onClick={handleSubmit} variant="contained" color="primary">
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

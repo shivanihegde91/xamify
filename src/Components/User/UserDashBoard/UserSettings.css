@@ -1,0 +1,72 @@
+/* UserSettings.css */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .settings-container {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .settings-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .dark .settings-title {
+    color: #199bc3;
+  }
+  
+  .settings-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .settings-item {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .settings-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .settings-item .icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  
+  .settings-item p {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Dark mode styles */
+  .dark .settings-container {
+    background-color: #1e1e1e;
+  }
+  
+  .dark .settings-item {
+    background-color: #2c2c2c;
+    color: #fff;
+  }
+  

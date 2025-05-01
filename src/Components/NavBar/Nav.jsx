@@ -28,7 +28,9 @@ function nav() {
   return (
     <div className='nav'>
         <nav>
-        <span className='park'>Xamify.</span>
+        <span className='exam'>
+        <img src ="/logo2.png" alt="logo" className='logo'/>
+        xamify</span>
         <div className='list'>
             <ul>
             <li><Link to={"/home"}> Home </Link></li>

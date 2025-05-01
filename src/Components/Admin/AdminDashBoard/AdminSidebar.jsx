@@ -1,3 +1,4 @@
+//src/Components/Admin/AdminSidebar.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -6,12 +7,15 @@ import SchoolIcon from "@mui/icons-material/School";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 
 const AdminLinks = [
   { title: "Dashboard", path: "/admindashboard", icon: <DashboardIcon /> },
   { title: "Exam", path: "/adminexam", icon: <SchoolIcon /> },
   { title: "Performance", path: "/adminperformance", icon: <AutoGraphIcon /> },
   { title: "Result", path: "/adminresult", icon: <WorkspacePremiumIcon /> },
+  { title: "Manage User", path: "/manageuser", icon: <ManageAccountsIcon /> },
   { title: "Settings", path: "/adminsettings", icon: <SettingsSuggestRoundedIcon /> },
 ];
 

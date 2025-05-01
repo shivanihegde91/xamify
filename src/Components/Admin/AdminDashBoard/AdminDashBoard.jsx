@@ -1,3 +1,4 @@
+// src/Components/Admin/AdminDashBoard.jsx
 import React from "react";
 import AdminSidebar from "./AdminSidebar";
 import { Box } from "@mui/material";
@@ -6,6 +7,7 @@ import AdminExam from "./AdminExam";
 import AdminPerformance from "./AdminPerformance";
 import AdminResult from "./AdminResult";
 import AdminSettings from "./AdminSettings";
+import ManageUser from "./ManageUser";
 
 const AdminDashBoard = () => {
   return (
@@ -17,6 +19,7 @@ const AdminDashBoard = () => {
           <Route path="/adminperformance" element={<AdminPerformance />} />
           <Route path="/adminresult" element={<AdminResult />} />
           <Route path="/adminsettings" element={<AdminSettings />} />
+          <Route path="/manageuser" element={<ManageUser/>}/>
         </Routes>
       </Box>
     

@@ -1,0 +1,33 @@
+.hero {
+    background: url(/home.jpg) center/cover no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero .btext {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px 30px;
+    color: #fff;
+    background-color: #111;
+    border-radius: 8px;
+    text-decoration: none;
+    text-shadow: 0 0 8px #000, 0 0 12px #555;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    
+}
+
+.hero .btext:hover {
+    background-color: #333;
+    color: #00bfff;
+    transform: scale(1.05);
+}
+.hero .button {
+    margin-bottom: 160px; /* adjust this value as needed */
+}
+
