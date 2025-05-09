@@ -128,8 +128,12 @@ const SignIn = () => {
       const isAdmin = userData.prefs?.isAdmin === true || userData.prefs?.isAdmin === "true";
       dispatch(login({ userData, userId: userData.$id, isAdmin }));
 
-      // Navigate directly to admin dashboard
+      if(isAdmin){
       navigate("/admindashboard");
+      }
+      else{
+        navigate("/userdashboard")
+      }
 
     } catch (err) {
       console.error("Login failed:", err);
@@ -172,3 +176,5 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+

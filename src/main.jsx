@@ -12,7 +12,7 @@ import Login from './Components/Login/Login.jsx';
 import SplashScreen from './Components/Splashscreen/SplashScreen.jsx';
 import NavBar from './Components/NavBar/Nav.jsx';
 import Hero from './Components/Hero/Hero.jsx';
-import Entry from './Components/Entry/UserOrAdmin.jsx';
+
 import UserDashboard from './Components/User/UserDashBoard/UserDashBoard.jsx';
 import UserExam from './Components/User/UserDashBoard/UserExam.jsx';
 import Userpage from './Components/User/UserDashBoard/Userpage.jsx';
@@ -26,10 +26,10 @@ import ManageUser from './Components/Admin/AdminDashBoard/ManageUser.jsx';
 import AdminSidebar from './Components/Admin/AdminDashBoard/AdminSidebar.jsx';
 import AdminPerformance from './Components/Admin/AdminDashBoard/AdminPerformance.jsx';
 import AdminExam from './Components/Admin/AdminDashBoard/AdminExam.jsx';
-import SignUp from './Components/SignUp/SignUp.jsx';
+
 import CreateAdminProfile from './Components/Admin/AdminDashBoard/CreateAdminProfile.jsx';
 import About from './Components/About/About.jsx';
-import UserSignUp from './Components/SignUp/UserSignUp.jsx';
+
 //import UserSignUp from './Components/SignUp/UserSignUp.jsx';
 import ResultDeatils from './Components/Details/ResultDetails.jsx';
 import PerformanceDetails from './Components/Details/PerformanceDetails.jsx';
@@ -48,14 +48,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/signup",
-        element: <SignUp />,
-      },
-      {
-        path: "/usersignup",
-        element: <UserSignUp />,
-     },
+
       {
         path: "/home",
         element: <Home />,
@@ -72,10 +65,7 @@ const router = createBrowserRouter([
         path: "/hero",
         element: <Hero />,
       },
-      {
-        path: "/entry",
-        element: <Entry />,
-      },
+     
       {
         path: "/createadminprofile",
         element: <CreateAdminProfile />,

@@ -1,21 +1,25 @@
 // src/Components/Admin/ManageUser.jsx
-// src/Components/Admin/ManageUser.jsx
+
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-//import { Service } from "../../../appwrite/cong";
-import { Service as service } from "../../../appwrite/cong";
+import { useNavigate } from "react-router-dom";
+import authService from "../../../appwrite/auth";
+import service from "../../../appwrite/cong";
+
 import "./ManageUser.css";
 
 const ManageUser = () => {
-  const userId = useSelector((state) => state.auth.userId);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "teacher", // Default role
+    role: "teacher",
+    phone: "", // Optional: if needed, include a phone field
   });
-  const [users, setUsers] = useState([]); // State to store the list of users
+
+  const [users, setUsers] = useState([]);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,32 +29,54 @@ const ManageUser = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      role: "teacher",
+      phone: "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess("");
     setError("");
-    setLoading(true);
+    setSuccess("");
 
-    // Optional: simple password length check
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters long.");
-      setLoading(false);
       return;
     }
 
+    setLoading(true);
+
     try {
-      const res = await service.manageUser(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.role
-      );
-      setSuccess("User account created successfully!");
-      setFormData({ name: "", email: "", password: "", role: "teacher" }); // Clear form
-      setUsers((prevUsers) => [...prevUsers, { ...formData, id: res.$id }]); // Add new user to the list
-      console.log(res);
+      const userAccount = await authService.createAccount({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        phone: formData.phone || "",
+      });
+
+      if (userAccount) {
+        // Store user in your backend as well
+        const res = await service.manageUser(
+          formData.name,
+          formData.email,
+          formData.password,
+          formData.role
+        );
+
+        setSuccess("User account created successfully!");
+        setUsers((prevUsers) => [...prevUsers, { ...formData, id: res.$id }]);
+        resetForm();
+
+      } else {
+        setError("Failed to create account. Please try again.");
+      }
     } catch (err) {
-      setError("Error creating user: " + err.message);
+      setError(err.message || "An error occurred during account creation.");
     } finally {
       setLoading(false);
     }
@@ -69,7 +95,7 @@ const ManageUser = () => {
           required
         />
         <input
-          type="text"
+          type="email"
           name="email"
           placeholder="Email"
           onChange={handleChange}
@@ -84,23 +110,24 @@ const ManageUser = () => {
           value={formData.password}
           required
         />
-        <select
-          name="role"
-          value={formData.role}
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone (optional)"
           onChange={handleChange}
-        >
+          value={formData.phone}
+        />
+        <select name="role" value={formData.role} onChange={handleChange}>
           <option value="teacher">Teacher</option>
-          <option value="student">Clear</option>
-          <option value="admin">academic adviser</option>
         </select>
         <button type="submit" disabled={loading}>
           {loading ? "Creating..." : "Create User"}
         </button>
       </form>
+
       {success && <p className="success-msg">{success}</p>}
       {error && <p className="error-msg">{error}</p>}
 
-      {/* Users Table */}
       <div className="users-table">
         <h3>Users List</h3>
         <table>

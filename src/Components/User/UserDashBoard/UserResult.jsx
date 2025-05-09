@@ -125,6 +125,7 @@ function UserResult() {
 
 export default UserResult;*/
 import React, { useState } from "react";
+import service from "../../../appwrite/cong";
 import './UserResult.css'; // Ensure the CSS file is properly linked
 
 function UserResult() {
@@ -150,7 +151,18 @@ function UserResult() {
 
     // Mock submission process (replace with actual API call)
     try {
-      setSubmittedMarks([...submittedMarks, {
+      const res=await service.UploadMarksData(
+        name,
+        rollNo,
+        studentClass,
+        parseInt(java),
+        parseInt(python),
+        parseInt(c),
+        parseInt(fds),
+        parseInt(ai),
+        parseInt(php)
+      );
+     setSubmittedMarks([...submittedMarks, {
         name,
         rollNo,
         studentClass,
@@ -161,8 +173,9 @@ function UserResult() {
         ai,
         php
       }]);
-
       alert('Marks Submitted Successfully!');
+      console.log(res);
+      
 
       // Reset the form
       setName('');

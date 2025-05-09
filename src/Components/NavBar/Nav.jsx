@@ -37,7 +37,6 @@ function nav() {
             <li><Link to={"/about"}> About</Link></li>
             {!authStatus ?(<>
             <li><Link to={"/login"}> Login</Link></li>
-            <li><Link to={"/signup"}>Sign-up</Link></li>
             </>
             ):(
               <>

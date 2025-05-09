@@ -17,12 +17,10 @@ const AdminSettings = () => {
   };
 
   const settingsOptions = [
-    { icon: <FaUser />, label: "Account", color: "#ff758c" },
+    //{ icon: <FaUser />, label: "Account", color: "#ff758c" },
     { icon: <FaInfoCircle />, label: "About us", color: "#ff9a44", action: () => navigate("/about") }, // 🧭 Navigate to /about
     { icon: darkMode ? <FaSun /> : <FaMoon />, label: "Theme", color: "#5b5aff", action: toggleTheme },
     { icon: <FaQuestionCircle />, label: "Help center", color: "#4dafff" },
-    { icon: <FaCog />, label: "General", color: "#3ccf63" },
-    { icon: <FaBell />, label: "Notifications", color: "#ff4bae" },
   ];
 
   return (
