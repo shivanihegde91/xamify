@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import "./UserExam.css";
+import EventIcon from '@mui/icons-material/Event';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
 import {
   Container,
   Typography,
@@ -34,40 +38,43 @@ export default function UserExam() {
   }, []);
 
   return (
-    <Container style={{ marginTop: "40px" }}>
-      <Typography variant="h4" gutterBottom>
-        Exam Timetable
-      </Typography>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell><strong>Date</strong></TableCell>
-              <TableCell><strong>Subject</strong></TableCell>
-              <TableCell><strong>Start Time</strong></TableCell>
-              <TableCell><strong>End Time</strong></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {events.map((event) => (
-              <TableRow key={event.id}>
-                <TableCell>{event.date}</TableCell>
-                <TableCell>{event.subject}</TableCell>
-                <TableCell>{event.startTime}</TableCell>
-                <TableCell>{event.endTime}</TableCell>
-              </TableRow>
-            ))}
-            {events.length === 0 && (
+      <Container className="exam-container">
+        <Typography variant="h4" gutterBottom className="exam-title">
+        <EventIcon style={{ color: "#003366" }} />
+        Exam Timetable
+        </Typography>
+
+        <TableContainer component={Paper}>
+          <Table className="exam-table">
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={4} align="center">
-                  No exam schedules available.
-                </TableCell>
+                <TableCell>Date</TableCell>
+                <TableCell>Subject</TableCell>
+                <TableCell><AccessTimeIcon fontSize="small" /> Start Time</TableCell>
+                <TableCell><AccessTimeIcon fontSize="small" /> End Time</TableCell>
+
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
-  );
-}
+            </TableHead>
+            <TableBody>
+              {events.map((event) => (
+                <TableRow key={event.id}>
+                  <TableCell>{event.date}</TableCell>
+                  <TableCell>{event.subject}</TableCell>
+                  <TableCell>{event.startTime}</TableCell>
+                  <TableCell>{event.endTime}</TableCell>
+                </TableRow>
+              ))}
+              {events.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={4} className="no-data-row">
+                    No exam schedules available.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    );
+  }

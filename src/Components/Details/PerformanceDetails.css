@@ -1,0 +1,73 @@
+/* PerformanceDetails.css */
+
+/* General container styles */
+.performance-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #194caa;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styling the info boxes */
+.performance-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-box {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h2 {
+  color: #2a3a9d;
+  margin-bottom: 10px;
+}
+
+.info-box p, .info-box ul {
+  color: #555;
+}
+
+/* Styling the unique navigate button */
+.navigate-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.navigate-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #1a3a7d; /* Blue color */
+  color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navigate-button:hover {
+  background-color: #ffb91c; /* Yellow color on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+.navigate-button:active {
+  transform: scale(1); /* Reset scale on click */
+}
+
+.navigate-button:focus {
+  outline: none; /* Remove focus outline */
+}

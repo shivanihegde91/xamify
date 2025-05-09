@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  background: linear-gradient(to right, #e3f2fd, #fffde7);
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-result-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-result-title {
+  text-align: center;
+  font-size: 32px;
+  color: #2c387e;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #2196f3, #fdd835, #ab47bc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.result-table th,
+.result-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.result-table th {
+  background: linear-gradient(to right, #64b5f6, #fff176);
+  color: #1a237e;
+  font-weight: 600;
+}
+
+.result-table tr:hover {
+  background-color: #f1f8ff;
+  transition: 0.3s;
+}
+
+/* 🎨 Mark color classes */
+.mark-top {
+  color: green;
+  font-weight: bold;
+}
+
+.mark-fail {
+  color: red;
+  font-weight: bold;
+}
+
+.mark-normal {
+  color: #333;
+}

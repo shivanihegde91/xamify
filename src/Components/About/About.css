@@ -1,33 +1,65 @@
+/* src/About.css */
 .about-container {
   font-family: 'Segoe UI', sans-serif;
-  padding: 20px;
+  padding: 40px 20px;
   max-width: 1000px;
   margin: auto;
+  min-height: 100vh; /* Full screen */
+  background: linear-gradient(to right, #e0f7fa, #fce4ec);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .top-banner {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .about-text h1, .about-text h2 {
-  color: #002b5c;
-  max-width: 1000px;
+  color: #0077b6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .about-text p {
   line-height: 1.6;
   font-size: 1rem;
   color: #333;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 12px;
+  border-left: 4px solid #00bcd4;
+  margin: 12px 0;
+  border-radius: 6px;
 }
 
 .about-text ul {
-  margin-top: 10px;
-  padding-left: 20px;
-  color: #444;
+  margin-top: 15px;
+  padding-left: 25px;
+  color: #006064;
+  font-weight: 500;
+}
+
+.about-text ul li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 25px;
+  font-size: 1rem;
+}
+
+.about-text ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #00796b;
+  font-weight: bold;
 }
 
 .card-section {
@@ -43,23 +75,31 @@
   gap: 20px;
   background-color: #f0f8ff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   align-items: center;
+  transition: transform 0.3s ease-in-out, background-color 0.3s;
+}
+
+.profile-card:hover {
+  transform: scale(1.03);
+  background-color: #e3f2fd;
 }
 
 .profile-card img {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card h4 {
   margin: 0;
   color: #004080;
+  font-size: 1.2rem;
 }
 
 .profile-card p {

@@ -22,7 +22,7 @@ const UserSettings = () => {
     { icon: darkMode ? <FaSun /> : <FaMoon />, label: "Theme", color: "#5b5aff", action: toggleTheme },
     { icon: <FaQuestionCircle />, label: "Help center", color: "#4dafff" },
     { icon: <FaCog />, label: "General", color: "#3ccf63" },
-    { icon: <FaBell />, label: "Notifications", color: "#ff4bae" },
+    //{ icon: <FaBell />, label: "Notifications", color: "#ff4bae" },
   ];
 
   return (

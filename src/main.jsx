@@ -31,6 +31,10 @@ import CreateAdminProfile from './Components/Admin/AdminDashBoard/CreateAdminPro
 import About from './Components/About/About.jsx';
 import UserSignUp from './Components/SignUp/UserSignUp.jsx';
 //import UserSignUp from './Components/SignUp/UserSignUp.jsx';
+import ResultDeatils from './Components/Details/ResultDetails.jsx';
+import PerformanceDetails from './Components/Details/PerformanceDetails.jsx';
+import PerformanceDetails2 from './Components/Details/PerformanceDetails2.jsx';
+import ResultDetails2 from './Components/Details/ResultDetails2.jsx';
 const router = createBrowserRouter([
   { 
     path: "/",
@@ -132,6 +136,25 @@ const router = createBrowserRouter([
         path: "/adminsidebar",
         element: <AdminSidebar />,
       },
+      {
+        path: "/resultdetails",
+        element: <ResultDeatils />,
+      },
+      {
+        path:"/performancedetails",
+        element:<PerformanceDetails/>,
+      },
+      {
+
+        path:"/performancedetails2",
+        element:<PerformanceDetails2/>,
+      },
+      {
+        path:"/resultdetails2",
+        element:<ResultDetails2/>,
+      },
+
+
     ]
   }
 ]);

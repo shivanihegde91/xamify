@@ -1,0 +1,77 @@
+/* Container for the form and table */
+.user-result-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #e6f0ff;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.user-result-container h2 {
+  text-align: center;
+  color: #004080;
+  margin-bottom: 20px;
+}
+
+/* Form layout */
+.user-result-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Input field styling */
+.user-result-form input {
+  width: 95%;
+  padding: 4px;
+  border: 2px solid #004080;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+/* Button styling */
+.user-result-form button {
+  background-color: #004080;
+  color: #ffd700;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Button hover effect */
+.user-result-form button:hover {
+  background-color: #00264d;
+  color: white;
+}
+
+/* Table styles for displaying marks */
+.marks-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.marks-table th,
+.marks-table td {
+  border: 1px solid #004080;
+  padding: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.marks-table th {
+  background-color: #004080;
+  color: #ffd700;
+}
+
+.marks-table td {
+  background-color: #f7faff;
+}

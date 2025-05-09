@@ -30,6 +30,8 @@ const UserSidebar = () => {
         width: "200px",
         display: "flex",
         flexDirection: "column",
+        left: 0, 
+        top: 0,
       }}
     >
       <Typography variant="h6" sx={{ mb: 2, textAlign: "center" }}>

@@ -1,122 +1,79 @@
-/* Sidebar Styling-AdminDashBoard.css */
-.sidebar {
-    background-color: darkblue;
-    color: white;
-    padding: 20px;
-    height: 100vh;
-    position: fixed;
-    width: 200px;
-}
-
-/* Sidebar Items */
-.sidebar-title {
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    transition: all 0.3s ease-in-out;
-}
-
-.sidebar-item:hover {
-    color: #f39c12;
-}
-
-/* Dashboard Layout */
-.dashboard-layout {
-    display: flex;
-}
-
-/* Dashboard Container (Ensures spacing from sidebar) */
+/* Dashboard Container */
 .dashboard-container {
-    padding: 30px;
-    margin-left: 220px; /* Adjusted so sidebar doesn’t overlap */
-    width: calc(100% - 220px);
-    text-align: center;
+  padding: 20px;
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
 }
 
 /* Welcome Section */
 .welcome-section {
-    background: linear-gradient(135deg, #5a67d8, #3b5998);
-    color: white;
-    border-radius: 15px;
-    padding: 30px;
-    text-align: left;
-    margin-bottom: 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #176fd3;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Welcome Text */
 .welcome-text h2 {
-    font-size: 30px;
-    font-weight: bold;
-    color: white; /* Default White */
-    margin: 0;
+  font-size:30px;
+  font-weight: bold;
+  margin:0;
+  justify-items: center;
 }
 
-/* Ensure "Welcome to Xamify" is Blue */
-.welcome-text h2 span {
-    color: #4a90e2 !important; /* Force Blue Color */
+.welcome-text span {
+  color: #e3d130;
 }
 
-/* Welcome Image */
 .welcome-image img {
-    width: 120px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80px;
+  margin-top: -25px;
+  border-radius: 20px;
+  float:right;
 }
 
-/* Grid Container - 3 Boxes in One Row */
+/* Grid Container - Holds All Three Images */
 .grid-container {
-    display: flex;
-    gap: 20px; /* Adjust spacing between cards */
-    padding-top: 20px;
-    justify-content: center; /* Aligns items properly */
-    flex-wrap: nowrap; /* Prevents cards from wrapping */
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 900px;
+  width: 100%;
+  margin-top: 10px;
 }
 
-/* Card Styling */
-.dashboard-card {
-    color: white;
-    min-width: 320px; /* Slightly bigger */
-    min-height: 140px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    flex: 1; /* Ensures all cards take equal width */
+/* Shared Style for All Three Image Boxes */
+.grid-container1,
+.image-replacement-box {
+  width: 30%; /* Ensures all 3 items fit in one row */
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
-.dashboard-card:hover {
-    transform: scale(1.05);
+.grid-container1:hover,
+.image-replacement-box:hover {
+  transform: translateY(-3px);
 }
 
-.card-count {
-    font-weight: bold;
-    font-size: 24px;
+/* Shared Image Styling */
+.dashboard-image-only,
+.image-replacement-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
-
-/* Exam Schedule Section */
-.exam-schedule {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-/* Small Calendar */
-.exam-calendar {
-    max-width: 300px;
-    margin: 0 auto;
-}
-

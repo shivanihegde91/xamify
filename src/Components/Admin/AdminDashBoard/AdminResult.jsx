@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import service from "../../../appwrite/cong"; // Adjust path if cong.js is in a different folder
+import service from "../../../appwrite/cong"; // Adjust path if needed
+import "./AdminResult.css"; // 💡 Add this
 
 function AdminResult() {
   const [results, setResults] = useState([]);
@@ -18,66 +19,51 @@ function AdminResult() {
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
-      <h2>Admin Result Page</h2>
+    <div className="admin-result-container">
+      <h2 className="admin-result-title">📊  Result </h2>
 
-      {/* Table to display results */}
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={thStyle}>Roll No</th>
-            <th style={thStyle}>Name</th>
-            <th style={thStyle}>Class</th>
-            <th style={thStyle}>Java</th>
-            <th style={thStyle}>Python</th>
-            <th style={thStyle}>C</th>
-            <th style={thStyle}>FDS</th>
-            <th style={thStyle}>AI</th>
-            <th style={thStyle}>PHP</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((result) => (
-            <tr key={result.$id}>
-              <td style={tdStyle}>{result.RollNumber}</td>
-              <td style={tdStyle}>{result.StudentName}</td>
-              <td style={tdStyle}>{result.Class}</td>
-              <td style={getMarkStyle(result.java)}>{result.java}</td>
-              <td style={getMarkStyle(result.python)}>{result.python}</td>
-              <td style={getMarkStyle(result.c)}>{result.c}</td>
-              <td style={getMarkStyle(result.fds)}>{result.fds}</td>
-              <td style={getMarkStyle(result.ai)}>{result.ai}</td>
-              <td style={getMarkStyle(result.php)}>{result.php}</td>
+      <div className="table-wrapper">
+        <table className="result-table">
+          <thead>
+            <tr>
+              <th>Roll No</th>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Java</th>
+              <th>Python</th>
+              <th>C</th>
+              <th>FDS</th>
+              <th>AI</th>
+              <th>PHP</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {results.map((result) => (
+              <tr key={result.$id}>
+                <td>{result.RollNumber}</td>
+                <td>{result.StudentName}</td>
+                <td>{result.Class}</td>
+                <td className={getMarkClass(result.java)}>{result.java}</td>
+                <td className={getMarkClass(result.python)}>{result.python}</td>
+                <td className={getMarkClass(result.c)}>{result.c}</td>
+                <td className={getMarkClass(result.fds)}>{result.fds}</td>
+                <td className={getMarkClass(result.ai)}>{result.ai}</td>
+                <td className={getMarkClass(result.php)}>{result.php}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-// Style objects
-const thStyle = {
-  border: "1px solid black",
-  padding: "8px",
-  backgroundColor: "#f2f2f2"
-};
-
-const tdStyle = {
-  border: "1px solid black",
-  padding: "8px"
-};
-
-// Function to conditionally color mark cells
-function getMarkStyle(mark) {
-  const color =
-    parseInt(mark) < 21
-      ? "red"
-      : parseInt(mark) > 90
-      ? "green"
-      : "black";
-
-  return { ...tdStyle, color };
+// 💡 Class-based color logic
+function getMarkClass(mark) {
+  const score = parseInt(mark);
+  if (score < 21) return "mark-fail";
+  if (score > 90) return "mark-top";
+  return "mark-normal";
 }
 
 export default AdminResult;
